@@ -1,0 +1,162 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static "register/mystylee.css" %}">
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <title>Sign in & Sign up Form</title>
+</head>
+
+<body>
+    {% if user.is_authenticated %}
+    You are logged in
+    {% else %}
+    
+    <!---------- Sign in page starts ---------->
+    <div class="container">
+        <div class="forms-container">
+            <div class="signin-signup">
+                <form action='{% url 'handleLogin' %}' method="post" class="sign-in-form">
+                    {% csrf_token %}
+                    <h2 class="title">Sign in</h2>
+                    
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" name="loginusername" placeholder="Email" />
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginpassword" name="loginpassword" autocomplete="loginpassword" placeholder="Password" required  />
+                    </div>
+                    <input class="btn solid" type="submit" value="Login" />
+                </form>
+
+                <!---------- Sign in page ends ---------->
+
+
+                <!---------- Sign up page for company starts ---------->
+
+                <form action="{% url 'handelSingup' %}" class="sign-up-form" method='post' id="company">
+                    {% csrf_token %}
+                    <h2 class="title">Sign up Company</h2>
+                    <input type="hidden" value="3" name="user_type" />
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" name="username" placeholder="Username" />
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="fname" name="fname" placeholder="First Name" />
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="lname" name="lname" placeholder="Last Name" />
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email"  id="email" name="email" placeholder="Email" />
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="pass1" name="pass1" placeholder="Password" />
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="pass2" name="pass2" placeholder="Confirm Password" />
+                    </div>
+
+                    <input type="submit" class="btn" value="Sign up" />
+                </form>
+
+                <!---------- Sign up page for company ends ---------->
+
+                <!---------- Sign up page for user starts ---------->
+
+                <form action="{% url 'handelSingup' %}" method='post' class="sign-up-form" id="user">
+                    {% csrf_token %}
+                    <h2 class="title">Sign up as Customer</h2>
+                    <input type="hidden" value="2" name="user_type" />
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" name="username" placeholder="Username" />
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="fname" name="fname" placeholder="First Name" />
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="lname" name="lname" placeholder="Last Name" />
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" name="email" placeholder="Email" />
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="pass1" name="pass1" placeholder="Password" />
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="pass2" name="pass2" placeholder="Confirm Password" />
+                    </div>
+
+                    <input type="submit" class="btn" value="Sign up" />
+                </form>
+                <!---------- Sign up page for user ends ---------->
+            </div>
+        </div>
+
+        <!---------- Static content starts ---------->
+        <div class="panels-container">
+            <div class="panel left-panel">
+                <div class="content">
+                    <h2>Bid N' Build</h2>
+                    <hr size="3" color="white">
+                    <br>
+                    <h3>New here ?</h3>
+                    <p>
+                        We have an awesome deal for you,join us and choose the product of your choice with your
+                        satisfaction. This will also allow you to choose the best deal for your company so
+                        let's<big><big> Bid N' build</big></big> the product If you haven't done any signup then sign up
+                        here
+                    </p>
+                    <button class="btn transparent" id="sign-up-btn-user">As A User</button>
+                    <button class="btn transparent" id="sign-up-btn-company">As A Company</button>
+                </div>
+
+            </div>
+            <div class="panel right-panel">
+                <div class="content">
+                    <h3>One of us ?</h3>
+                    <p>
+                        "Here we value your desire"
+                    </p>
+                    <button class="btn transparent" id="sign-in-btn">Sign in</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!---------- Static content starts ---------->
+
+    </div>
+    {% endif %}
+    <script src="{% static "register/app.js" %}"></script>
+</body>
+
+</html>

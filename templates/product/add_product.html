@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Add Product{% endblock title %}
+{% block addProductActive %}active{% endblock addProductActive %}
+{% block body %}
+{% if user.is_authenticated %}
+
+<div class="container-fluid bg-white my-5 p-2" id="add-prod-css">
+<!-- <h1 class="text-center">List Your</h1> -->
+    
+    <br/><br/>
+    <div class="form-group">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+        <div class="text-center"><button class="btn btn-outline-dark" >POST</button></div>
+        
+    </form>
+</div>
+
+{% else %}
+You are Not allowed here
+{% endif %}
+</div>
+<script>
+    var name="{{ user.id }}";
+    document.getElementById("user_id").value=name;
+</script>
+
+{% endblock body %}
