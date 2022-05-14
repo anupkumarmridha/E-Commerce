@@ -2,7 +2,7 @@
 {% block title %}EDIT PRODUCT{% endblock title %}
 {% block body %}
 {% if user.is_authenticated %}
-{% if user.customer.id == product.author.id %}
+
 <!-- <div class="container">
     
         <h1 class="text-center">Update Product : {{ product.title }}</h1>
@@ -34,9 +34,7 @@
         </form>
     </div>
 </div>
-{% else %}
-You are Not allowed here
-{% endif %}
+
 {% else %}
 You are Not allowed here
 

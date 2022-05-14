@@ -45,8 +45,8 @@
                 <td>{{product.created_at}}</td>
                 <td>{{product.updated_at}}</td>
                 <td>
-                    <a href="#" type="button" class="btn btn-outline-warning btn-sm mx-1">Update</a>
-                    <a href="#" type="button" class="btn btn-outline-danger btn-sm mx-1">Delete</a>
+                    <a href="{% url 'update_product' product.pk %}" type="button" class="btn btn-outline-warning btn-sm mx-1">Update</a>
+                    <a href="{% url 'delete_product' product.pk %}" type="button" class="btn btn-outline-danger btn-sm mx-1">Delete</a>
                 </td>
             </tr>
             {% endfor %}

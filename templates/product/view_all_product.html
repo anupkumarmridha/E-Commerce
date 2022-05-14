@@ -36,7 +36,7 @@
 
                   <li class="list-group-item d-flex justify-content-between align-items-center">
                   
-                  Budget:
+                  Price:
                    
     
                   <span class="badge bg-success rounded-pill">₹ {{ product.price }}</span>
@@ -101,12 +101,16 @@
          {% csrf_token %}
          <div class="modal-body">  
             <input type="hidden" class="form-control" value="{{ product.pk }}" id="product_id" name="product_id" placeholder="{{ product.pk }}">
-            <input type="number" name="items" id="items" class="form-control" min='1', max={{product.total_stocks}} placeholder="Enetr No of Items You Want to Buy">
-            <input type="number" class="form-control" id="total_price" name="total_price" value="{{product.price}}"> 
+            <label>Total Items: </label>
+            <input type="number" onclick=total_price_cal() name="items" id="items" class="form-control" min='1', max={{product.total_stocks}} placeholder="Enetr No of Items You Want to Buy">
+            <label>Total Price: </label>
+            <input type="number" class="form-control" id="total_price" name="total_price" value=""> 
             
             <script>
-              let item=document.getElementById('items').value;
-              document.getElementById("total_price").value  =item*{{ product.price }};
+              function total_price_cal(){
+              var item=document.getElementById('items').value;
+              document.getElementById("total_price").value=item*{{ product.price }};
+            }
             </script>
             
             <input type="text" name="delivery_address" placeholder="Enter Your delivery address" class="form-control" >         
@@ -142,7 +146,7 @@
                </div>
              <ul class="list-group">
                <li class="list-group-item d-flex justify-content-between align-items-center">
-               Budget:
+               Price:
                <span class="badge bg-success rounded-pill">₹ {{product.price}} </span>
                </li>
                <li class="list-group-item d-flex justify-content-between align-items-center">

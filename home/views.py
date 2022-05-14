@@ -19,7 +19,7 @@ context['cats_menu']=cats_menu
 
 # Create your views here.
 def homeView(request):
-    return render(request,'home/index.html', context)
+    return redirect('all_product_details')
 
 def add_category(request):
     return render(request,'home/index.html')
@@ -119,13 +119,21 @@ def admin_all_product_details(request):
     }
     return render(request,'product/admin_product_list.html', context)
 
-class DeletePostView(DeleteView):
+class delete_product(DeleteView):
     model=Product
     template_name='product/delete_product.html'
-    success_url=reverse_lazy('homeView')
+    
+    def get_success_url(self):
+        return reverse('admin_product_list')
 
-def delete_product(request,cats):
-    return render(request,'home/index.html')
+class update_product(UpdateView):
+    model=Product
+    form_class=EditProductForm
+    template_name='product/update_product.html'
+    
+    def get_success_url(self):
+        return reverse( 'admin_product_list')
+
 
 def place_order(request):
     if request.method=='POST':
