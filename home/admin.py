@@ -6,5 +6,6 @@ admin.site.register(Category)
 admin.site.register(Product)
 admin.site.register(Order)
 admin.site.register(ManageOrder)
+
 admin.site.register(Rating)
 admin.site.register(Review)

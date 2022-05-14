@@ -81,14 +81,14 @@
 
 <!-- -----------------------------------Product list end----------------------------------- -->
 
-   <!-- -----------------------------------Bid Modal start----------------------------------- -->
+   <!-- -----------------------------------Order Modal start----------------------------------- -->
    {% for product in all_products %}
    <!-- Modal -->
  
    
    
   
- <!-- -----------------------------------Bid Modal end----------------------------------- -->
+ <!-- -----------------------------------Order Modal end----------------------------------- -->
 
  <div class="modal fade" id="productbid_{{product.pk}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
    <div class="modal-dialog">
@@ -102,10 +102,24 @@
          <div class="modal-body">  
             <input type="hidden" class="form-control" value="{{ product.pk }}" id="product_id" name="product_id" placeholder="{{ product.pk }}">
             <label>Total Items: </label>
-            <input type="number" onclick=total_price_cal() name="items" id="items" class="form-control" min='1', max={{product.total_stocks}} placeholder="Enetr No of Items You Want to Buy">
+            <input type="number" onclick=total_price_cal() name="items" id="items" class="form-control" min='1', max={{product.total_stocks}} placeholder="Enter No of Items You Want to Buy">
             <label>Total Price: </label>
             <input type="number" class="form-control" id="total_price" name="total_price" value=""> 
-            
+            {% if user.user_type == '3' %}
+              <label>Employee ID: </label>
+              <input type="text" name="emp_id" id="emp_id" class="form-control" placeholder="Employee ID">
+              
+              <label>Employee Name: </label>
+              <input type="text" name="emp_name" id="emp_name" class="form-control" placeholder="Employee Name">
+              <div class="form-group">
+                <label class="label" for="purpose">Purpose</label>
+                <select class="form-select" name="purpose" required>
+                    <option selected disabled>Select Purpose</option>
+                    <option >Personal Use</option>
+                    <option >Company Use</option>
+                </select>
+            </div>
+            {% endif %}
             <script>
               function total_price_cal(){
               var item=document.getElementById('items').value;

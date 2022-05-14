@@ -84,7 +84,7 @@ def handleLogin(request):
             elif user_type == '2':
                 customer_exist = Customer.objects.filter(user=user).exists()
                 if customer_exist:
-                    messages.success(request,f"Welcome {user.username} to Bid 'N Build !")
+                    messages.success(request,f"Welcome {user.username} to E-Electronics !")
                     return redirect(views.homeView)
 
                 return redirect('add_customer')
@@ -98,7 +98,7 @@ def handleLogin(request):
                 
                 company_exist = Company.objects.filter(user=user).exists()
                 if company_exist:
-                    messages.success(request,f"Welcome {company.company_name} to Bid 'N Build !")
+                    messages.success(request,f"Welcome {company.company_name} to E-Electronics !")
                     return redirect(views.all_product_details)
                 return redirect('add_company')
         else:

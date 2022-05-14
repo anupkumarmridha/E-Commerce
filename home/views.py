@@ -141,6 +141,12 @@ def place_order(request):
         user=request.user
         items=request.POST['items']
         delivery_address=request.POST['delivery_address']
+
+        if user.user_type=="3":
+            emp_id=request.POST['emp_id']
+            emp_name=request.POST['emp_name']
+            purpose=request.POST['purpose']
+
         try:
             product=Product.objects.get(id=product_id)
             total_price=product.price*int(items)
@@ -150,8 +156,11 @@ def place_order(request):
             order.items=items
             order.total_price=total_price
             order.delivery_address=delivery_address
+            if user.user_type=="3":
+               order.emp_id=emp_id
+               order.emp_name=emp_name
+               order.purpose=purpose    
             order.save()
-            
             # making product order status true
 
             product.total_orders=product.total_orders+int(items)
@@ -175,17 +184,63 @@ def place_order(request):
     return render(request,'orders/add_order_details.html',context)
 
 def add_order_details(request,pk):
+    order=Order.objects.get(id=pk)
+
+    cats_menu=Category.objects.all()
+    # print(bid.id)
+    # print(bid.product.author.address)
+    if request.method=='POST':
+        delivery_date=request.POST['delivery_date']
+        shipping_partner=request.POST['shipping_partner']
+        product_location=request.POST['product_location']
+        delivery_address=request.POST.get('delivery_address')
+        payment_status=request.POST['payment_status']
+        try:
+            order=ManageOrder(order=order,delivery_date=delivery_date,shipping_partner=shipping_partner,product_location=product_location,delivery_address=delivery_address, payment_status=payment_status)
+            order.save()
+            messages.success(request, "Order Successfully Aded")
+            return redirect('view_order_details',pk=order.id)
+        except Exception as e:
+            messages.error(request,e)
+            return redirect('view_order_details',pk=order.id)
+  
+    context={
+        'order':order,
+        'cats_menu':cats_menu
+    }
     return render(request,'orders/add_order_details.html',context)
 
 def update_order_details(request,pk):
+    order=Order.objects.get(id=pk)
+    cats_menu=Category.objects.all()
+    context={
+        'order':order,
+        'cats_menu':cats_menu
+    }
     return render(request,'orders/update_order.html',context)
 
 def view_order_details(request,pk):
+    order=Order.objects.get(id=pk)
+    # try:
+    orderDetails=ManageOrder.objects.get(order=order)
+    # except Exception as e:
+    #     messages.info(request,"Please Add Order Details")
+    #     return redirect('view_all_order') 
+    cats_menu=Category.objects.all()
+    context={
+        'order':order,
+        'orderDetails':orderDetails,
+        'cats_menu':cats_menu
+    }
+        
+    # print(orderDetails.order.user.f_name)
     return render(request,'orders/view_order_details.html',context)
 
 def view_all_order(request):
-    all_products=Product.objects.all()
+    cats_menu=Category.objects.all()
+    all_orders=Order.objects.all()
     context={
-        'all_product':all_products
+        'all_orders':all_orders,
+        'cats_menu':cats_menu
     }
-    return render(request,'orders/view_order_details.html',context)
+    return render(request,'orders/view_all_orders.html',context)

@@ -9,7 +9,6 @@ class User(AbstractUser):
     user_type_data = ((1, "Admin"),(2, "Customer"), (3, "Company"))
     # user_type = models.CharField(choices=user_type_data, max_length=20)
     user_type = models.CharField(default=1, choices=user_type_data, max_length=20)
-    
 
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)

@@ -30,7 +30,7 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title + ' | ' + str( self.author) + ' | ' + str(self.total_stocks)
+        return self.title + ' | ' + str( self.author)
 
     @property
     def image_url(self):
@@ -44,9 +44,13 @@ class Order(models.Model):
     items=models.IntegerField()
     total_price=models.DecimalField(max_digits=8, decimal_places=2)
     delivery_address=models.CharField(max_length=255)
-    
+    emp_id=models.CharField(max_length=255, default="NA")
+    emp_name=models.CharField(max_length=255, default="NA")
+    purpose_choice=(('Personal Use',"Personal Use"),('Company Use',"Company Use"))
+    purpose = models.CharField(choices=purpose_choice, default="Personal Use", max_length=20)
     def __str__(self):
         return (str(self.product) + ' | ' + str(self.user) + ' | ' + str(self.total_price))
+
 
 class ManageOrder(models.Model):
     order=models.ForeignKey(Order,on_delete=models.CASCADE)

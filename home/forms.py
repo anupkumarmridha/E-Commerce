@@ -15,7 +15,7 @@ class PostProductForm(forms.ModelForm):
         widgets={
             'title': forms.TextInput(attrs={'class': 'form-control','placeholder':'Enter the Title'}),
             'category': forms.Select(attrs={'class': 'form-control'}),
-            'author': forms.TextInput(attrs={'class': 'form-control','value':'', 'id':'user_id'}),
+            'author': forms.TextInput(attrs={'class': 'form-control','value':'', 'id':'user_id', 'type':'hidden'}),
             'desc':forms.TextInput(attrs={'class':'form-control'}),
             'price':forms.TextInput(attrs={'class':'form-control'}),
             'total_stocks':forms.TextInput(attrs={'class':'form-control'}),

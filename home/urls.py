@@ -27,6 +27,7 @@ urlpatterns = [
 
     # end point for orders
     path('place_order', views.place_order, name='place_order'),
+    path('view_all_order', views.view_all_order, name='view_all_order'),
     path('add_order_details/<int:pk>', views.add_order_details, name='add_order_details'),
     path('view_order_details/<int:pk>', views.view_order_details, name='view_order_details'),
     path('update_order_details/<int:pk>', views.update_order_details, name='update_order_details'),

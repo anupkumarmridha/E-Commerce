@@ -82,34 +82,56 @@
 
 
 
+ <!-- -----------------------------------Order Modal end----------------------------------- -->
 
-<!-- -----------------------------------Bid Modal end----------------------------------- -->
-
-<div class="modal fade" id="productbid_{{product.pk}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-  <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Confirm Your Order</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-  </div>
-  <form action='{% url 'place_order' %}' method='post'>
-    {% csrf_token %}
-    <div class="modal-body">
-      
-        <input  class="form-control" value="{{ product.pk }}" id="product_id" name="product_id" placeholder="{{ product.pk }}">
-        <input  class="form-control" id="user_id" name="user_id" value="{{ user.id }}" placeholder="{{ user.id }}">
-        <input name="conf_order" class="form-control" value="True">
-        <input type="text" name="delivery_address" placeholder="Enter Your delivery address" class="form-control" >
-
+ <div class="modal fade" id="productbid_{{product.pk}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirm Your Order</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action='{% url 'place_order' %}' method='post'>
+        {% csrf_token %}
+        <div class="modal-body">  
+           <input type="hidden" class="form-control" value="{{ product.pk }}" id="product_id" name="product_id" placeholder="{{ product.pk }}">
+           <label>Total Items: </label>
+           <input type="number" onclick=total_price_cal() name="items" id="items" class="form-control" min='1', max={{product.total_stocks}} placeholder="Enter No of Items You Want to Buy">
+           <label>Total Price: </label>
+           <input type="number" class="form-control" id="total_price" name="total_price" value=""> 
+           {% if user.user_type == '3' %}
+             <label>Employee ID: </label>
+             <input type="text" name="emp_id" id="emp_id" class="form-control" placeholder="Employee ID">
+             
+             <label>Employee Name: </label>
+             <input type="text" name="emp_name" id="emp_name" class="form-control" placeholder="Employee Name">
+             <div class="form-group">
+               <label class="label" for="purpose">Purpose</label>
+               <select class="form-select" name="purpose" required>
+                   <option selected disabled>Select Purpose</option>
+                   <option >Personal Use</option>
+                   <option >Company Use</option>
+               </select>
+           </div>
+           {% endif %}
+           <script>
+             function total_price_cal(){
+             var item=document.getElementById('items').value;
+             document.getElementById("total_price").value=item*{{ product.price }};
+           }
+           </script>
+           
+           <input type="text" name="delivery_address" placeholder="Enter Your delivery address" class="form-control" >         
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-success">Confirm</button>
+      </div>
+    </form>
     </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-    <button type="submit" class="btn btn-success">Submit</button>
   </div>
-</form>
 </div>
-</div>
-</div>
+
 
 <!-- -----------------------------------Product requirement Modal start----------------------------------- -->
 <!-- Modal -->
