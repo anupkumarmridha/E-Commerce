@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} All Product Details {% endblock title %}
+{% block body %}
+<div class="container my-3">
+    <h2>All Products</h2>
+
+    <table class="table">
+        <tbody>
+            <thead>
+                <tr>
+                    <th scope="col">sno</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Desc</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Total Stocks</th>
+                    <th scope="col">Total Orders</th>
+                    <th scope="col">Total Sell</th>
+                    <th scope="col">Created At</th>
+                    <th scope="col">Updated At</th>
+                </tr>
+            </thead>
+            {% for product in all_products %}
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td><a href="{% url 'product_details' product.pk %}">{{product.title}} </a></td>
+                <td>{{product.author}}</td>
+                <td>{{product.category}}</td>
+                <td>{{product.desc | slice:':120' | safe }}</td>
+                <td>
+                    {% if product.product_image %}
+                    <img src=" {{ product.image_url|default_if_none:'#' }} " class="card-img-top p-2" alt="..." width="200" height="120">
+                    {% else %}
+                    <img src="{% static 'img/product.jpg' %}" alt="Avatar"  class="rounded-circle"  width=75 height=75>
+                    {% endif %}
+                </td>
+
+                <td>{{product.price}}</td>
+                <td>{{product.total_orders}}</td>
+                <td>{{product.total_stocks}}</td>
+                <td>{{product.total_sell_price}}</td>
+                <td>{{product.created_at}}</td>
+                <td>{{product.updated_at}}</td>
+                <td>
+                    <a href="#" type="button" class="btn btn-outline-warning btn-sm mx-1">Update</a>
+                    <a href="#" type="button" class="btn btn-outline-danger btn-sm mx-1">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock body %}

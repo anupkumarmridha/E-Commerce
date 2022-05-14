@@ -15,21 +15,22 @@ class Category(models.Model):
 
 class Product(models.Model):
     title=models.CharField(max_length=255)
-    
     author=models.ForeignKey(User, on_delete=models.CASCADE)
-    order_status=models.BooleanField(default=False)
-    product_image = models.ImageField(null=True, blank=True, upload_to='images/products/')
-    total_stocks=models.IntegerField()
     desc=RichTextField(blank=True, null=True)
+    product_image = models.ImageField(null=True, blank=True, upload_to='images/products/')
+    
+    total_orders=models.IntegerField(default=0)
+    total_stocks=models.IntegerField()
     
     price=models.DecimalField(max_digits=8, decimal_places=2)
-    category=models.ForeignKey(Category, on_delete=models.CASCADE)
+    total_sell_price=models.DecimalField(max_digits=8, decimal_places=2, default=0)
 
+    category=models.ForeignKey(Category, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title + ' | ' + str( self.author)
+        return self.title + ' | ' + str( self.author) + ' | ' + str(self.total_stocks)
 
     @property
     def image_url(self):
@@ -37,13 +38,18 @@ class Product(models.Model):
             return self.product_image.url
 
 
-class Buy(models.Model):
+class Order(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
+    items=models.IntegerField()
+    total_price=models.DecimalField(max_digits=8, decimal_places=2)
     delivery_address=models.CharField(max_length=255)
     
-class Order(models.Model):
-    buy=models.ForeignKey(Buy, related_name="order",on_delete=models.CASCADE)
+    def __str__(self):
+        return (str(self.product) + ' | ' + str(self.user) + ' | ' + str(self.total_price))
+
+class ManageOrder(models.Model):
+    order=models.ForeignKey(Order,on_delete=models.CASCADE)
     delivery_date=models.DateField()
     shipping_partner=models.CharField(max_length=255)
     product_location=models.CharField(max_length=255)

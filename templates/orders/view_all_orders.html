@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Orders{% endblock title %}
+{% block body %}
+
+<!-- section to view listed products -->
+    
+
+      <section id="view-listed-products">
+        <h2 class="text-center">Listed Order Details</h2>
+        
+          <div class="container my-5">
+          <div id="accordion">
+            <div class="card">
+              {% for product in all_product %}
+                  <div class="card-header" id="headingTwo" data-toggle="collapse" data-target="#product_{{product.pk}}" aria-expanded="true" aria-controls="product_{{product.pk}}">
+                    <h5 class="mb-0"></h5>
+
+                     <h6 class="mb-0">{{ product.title }}</h6>
+                  </div>
+                  
+                    <div id="product_{{product.pk}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                      <div class="card-body">
+                        <div class="bid-details my-1">
+                        
+                                  <p class="d-inline">Offerd Price :  
+                                  Company: <a type="button" class="btn-sm btn-warning" href="{% %}"> {{}} </a></p>
+                                  
+                                    <p>Offer Acepted</p>
+                                    <a href="{% url 'view_order_details' bid.pk %}" type="button" class="btn-sm btn-success">View Order</a>
+                                   
+                              <p class="d-inline">Offerd Price : ₹ 
+                              Company: <a type="button" class="btn-sm btn-warning" href="{% %}"> {{}} </a></p>
+                              <a href="" type="button" class="btn-sm btn-success">Accept</a>
+                              {% comment %} <button type="button" class="btn-sm btn-danger">Decline</button> {% endcomment %}
+
+                      
+                          </p>
+
+                        </div>
+                        
+                        {% comment %} <div class="bid-details my-1">
+                          <p class="d-inline">Bid#2 details</p>
+                          <button type="button" class="btn-sm btn-success">Accept</button>
+                          <button type="button" class="btn-sm btn-danger">Decline</button>
+                        </div> {% endcomment %}
+                      </div>
+                    </div>
+                  {% endfor %}
+            </div>
+          </div>
+        </div>
+        
+        </section>
+        
+{% endblock body %}
+
+{% block custom_js %}
+<script src="{% static "js/users.js" %}"></script>
+{% endblock custom_js %}

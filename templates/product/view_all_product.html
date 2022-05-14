@@ -52,11 +52,17 @@
                     <i class="bi bi-info-circle-fill mr-1" ></i>Info
                   </button>
                   {% if user.is_authenticated %}
-                     
-                      <button type="button" class="btn btn-dark fw-bold m-2" data-bs-toggle="modal" data-bs-target="#productbid_{{product.pk}}" style="background-color: #405cf5;border:0px">
+                  
+                     {% if product.total_stocks is 0 %}
+                     <label class="btn btn-dark fw-bold m-2" style="background-color: #405cf5;border:0px">
+                      Product Currently Not Available
+                     </label>
+                     {% else %} 
+                     <button type="button" class="btn btn-dark fw-bold m-2" data-bs-toggle="modal" data-bs-target="#productbid_{{product.pk}}" style="background-color: #405cf5;border:0px">
                         Place Order
                       </button>
-                     
+
+                    {% endif %}
                   {% else %}
                     <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#loginModal" style="background-color: #405cf5;border:0px">
                       Place Order
@@ -94,10 +100,16 @@
        <form action='{% url 'place_order' %}' method='post'>
          {% csrf_token %}
          <div class="modal-body">  
-            <input  class="form-control" value="{{ product.pk }}" id="product_id" name="product_id" placeholder="{{ product.pk }}">
-             <input  class="form-control" id="user_id" name="user_id" value="{{ user.id }}" placeholder="{{ user.id }}">
-             <input name="conf_order" class="form-control" value="True"> 
-             <input type="text" name="delivery_address" placeholder="Enter Your delivery address" class="form-control" >         
+            <input type="hidden" class="form-control" value="{{ product.pk }}" id="product_id" name="product_id" placeholder="{{ product.pk }}">
+            <input type="number" name="items" id="items" class="form-control" min='1', max={{product.total_stocks}} placeholder="Enetr No of Items You Want to Buy">
+            <input type="number" class="form-control" id="total_price" name="total_price" value="{{product.price}}"> 
+            
+            <script>
+              let item=document.getElementById('items').value;
+              document.getElementById("total_price").value  =item*{{ product.price }};
+            </script>
+            
+            <input type="text" name="delivery_address" placeholder="Enter Your delivery address" class="form-control" >         
          </div>
        <div class="modal-footer">
          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

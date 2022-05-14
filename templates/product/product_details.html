@@ -57,17 +57,9 @@
 <div class="d-flex flex-column flex-md-row justify-content-md-evenly">
 <p> <strong>Price:</strong> <span class="badge bg-success" style="letter-spacing: 1px;"> ₹ {{ product.price }} </span></p>
 <br>
-<p> <strong>Total Bids</strong> <span class="badge bg-dark" style="letter-spacing: 1px;">{{ product.bids.all.count }}</span>  </p>
+<p> <strong>Total Available</strong> <span class="badge bg-dark" style="letter-spacing: 1px;">{{ product.total_stocks }}</span>  </p>
 </div>
 <br>
-    {% if not product.bids.all %}
-    
-    
-    <small>Make Your First Bid</small>
-
-    
-
-    {% endif %}
 
 {% if user.is_authenticated %}
     <small> 
