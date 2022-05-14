@@ -42,9 +42,15 @@
               <li class="nav-item mx-2">
                 <a class="nav-link" href="{% url 'view_all_order' %}">Orders</a>
               </li>
-
+              {% else %}
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="{% url 'user_view_all_order' %}">Orders</a>
+              </li>
+              
               {% endif %}
 
+
+              {% endif %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="{% url 'all_category_details' %}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Category
@@ -56,7 +62,7 @@
                 {% endfor %}
               </ul>
             </li>
-            {% endif %}
+           
           </ul>
 
           

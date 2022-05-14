@@ -28,7 +28,7 @@
             {% for order in all_orders %}
             <tr>
                 <th scope="row">{{ forloop.counter }}</th>
-                <td><a href="{% url 'view_order_details' order.pk %}">{{order.product}} </a></td>
+                <td>{{order.product}}</td>
                 <td>{{order.user}}</td>
                 <td>
                   {% if order.user.user_type == '1' %}
@@ -58,8 +58,28 @@
                 <td>{{order.emp_name}}</td>
                 <td>{{order.purpose}}</td>
                 <td>
-                    <a href="{% url 'add_order_details' order.pk %}" type="button" class="btn btn-outline-success btn-sm mx-1">Add</a>
+                    {% if user.user_type == '1' %}
+                    {% comment %} If User is Admin {% endcomment %}
+                    
+                    {{order.orderDetails}}
+                    {% comment %} 
+                    Need to Implement if orderDetails exsit then display update button
+                    else display add button
+                    {% endcomment %}
+                    <a href="{% url 'view_order_details' order.pk %}" type="button" class="btn btn-outline-primary btn-sm mx-1">View </a>
+                    
                     <a href="{% url 'update_order_details' order.pk %}" type="button" class="btn btn-outline-warning btn-sm mx-1">Update</a>
+                    
+                    <a href="{% url 'add_order_details' order.pk %}" type="button" class="btn btn-outline-success btn-sm mx-1">Add</a>
+                    
+                   
+                    
+                    {% else %}
+
+                    {% comment %} User is Not admin {% endcomment %}
+                    <a href="{% url 'view_order_details' order.pk %}" type="button" class="btn btn-outline-primary btn-sm mx-1">View </a>
+                    
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}
