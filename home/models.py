@@ -61,7 +61,7 @@ class ManageOrder(models.Model):
     payment_status=models.CharField(max_length=255)
     
     def __str__(self):
-        return str(self.product)
+        return str(self.order)
 
 class Rating(models.Model):
     product=models.ForeignKey(Product, on_delete=models.CASCADE)

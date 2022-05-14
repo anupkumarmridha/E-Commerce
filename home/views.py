@@ -185,7 +185,7 @@ def place_order(request):
 
 def add_order_details(request,pk):
     order=Order.objects.get(id=pk)
-
+    
     cats_menu=Category.objects.all()
     # print(bid.id)
     # print(bid.product.author.address)
@@ -198,11 +198,11 @@ def add_order_details(request,pk):
         try:
             order=ManageOrder(order=order,delivery_date=delivery_date,shipping_partner=shipping_partner,product_location=product_location,delivery_address=delivery_address, payment_status=payment_status)
             order.save()
-            messages.success(request, "Order Successfully Aded")
-            return redirect('view_order_details',pk=order.id)
+            messages.success(request, "Order Details Successfully Aded")
+            return redirect('view_order_details',pk=pk)
         except Exception as e:
             messages.error(request,e)
-            return redirect('view_order_details',pk=order.id)
+            return redirect('view_order_details',pk=pk)
   
     context={
         'order':order,
@@ -221,11 +221,12 @@ def update_order_details(request,pk):
 
 def view_order_details(request,pk):
     order=Order.objects.get(id=pk)
-    # try:
-    orderDetails=ManageOrder.objects.get(order=order)
-    # except Exception as e:
-    #     messages.info(request,"Please Add Order Details")
-    #     return redirect('view_all_order') 
+    
+    try:
+        orderDetails=ManageOrder.objects.get(order=order)
+    except Exception as e:
+        messages.info(request,"Please Add Order Details")
+        return redirect('view_all_order') 
     cats_menu=Category.objects.all()
     context={
         'order':order,
@@ -239,6 +240,8 @@ def view_order_details(request,pk):
 def view_all_order(request):
     cats_menu=Category.objects.all()
     all_orders=Order.objects.all()
+    for i in all_orders:
+        print(i.id)
     context={
         'all_orders':all_orders,
         'cats_menu':cats_menu

@@ -6,7 +6,7 @@
 
 {% block body %}
 
-{% if not bid.order.all %}
+
 <section class="ftco-section">
     <div class="container">
         <!---------- Heading---------->
@@ -95,19 +95,14 @@
         </div>
         <!---------- Order Summary form end---------->
     </div>
-    {% else %}
+  
 <!---------- local stylesheet ---------->
 <link rel="stylesheet" href="{% static "css/view_order_style.css" %}">
 
-<a href=" {% url 'view_order_details' bid.pk %}" type="button" class="btn btn-primary btn-sm-center">
-    View Order
-   
-</a>
 
 {% comment %} <a href=" {% url 'update_order_details' bid.pk %}" type="button" class="btn btn-primary btn-sm-center">
     Update Order
    
 </a> {% endcomment %}
-    {% endif %}
 </section>
 {% endblock body %}
