@@ -38,7 +38,10 @@ class Product(models.Model):
         if self.product_image and hasattr(self.product_image, 'url'):
             return self.product_image.url
 
-
+class Cart(models.Model):
+    product=models.ForeignKey(Product,on_delete=models.CASCADE)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    
 class Order(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
     user=models.ForeignKey(User,on_delete=models.CASCADE)

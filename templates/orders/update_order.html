@@ -30,7 +30,10 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
+                                                
                                                 <label class="label" for="delivery_date">Delivered by:</label>
+                                                <br>
+                                                {{orderDetails.delivery_date}}
                                                 <input type="date" class="form-control" name="delivery_date"
                                                     id="delivery_date" value="{{orderDetails.delivery_date}}">
                                             </div>
@@ -39,6 +42,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="label" for="shipping_partner">Shipping Partner</label>
+                                                <br><br>
                                                 <input type="text" class="form-control" name="shipping_partner"
                                                     id="shipping_partner" placeholder="Shipped via" value="{{orderDetails.shipping_partner}}">
                                             </div>

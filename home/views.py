@@ -6,7 +6,7 @@ from django.urls import reverse_lazy, reverse
 from django.urls import is_valid_path
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from account.models import Company, Customer
-from home.models import Category, Product, Order, ManageOrder
+from home.models import Category, Product, Order, ManageOrder,Cart
 from home.forms import PostProductForm, EditProductForm
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
@@ -253,7 +253,7 @@ def view_order_details(request,pk):
     try:
         orderDetails=ManageOrder.objects.get(order=order)
     except Exception as e:
-        messages.info(request,"Please Add Order Details")
+        messages.info(request,"Order Details Not Added")
         return redirect('view_all_order') 
     cats_menu=Category.objects.all()
     context={
@@ -267,7 +267,11 @@ def view_order_details(request,pk):
 
 def view_all_order(request):
     cats_menu=Category.objects.all()
-    all_orders=Order.objects.all()
+    user=request.user
+    if user.user_type=='1':
+        all_orders=Order.objects.all()
+    else:
+        all_orders=Order.objects.filter(user=user)
     try:
         orderDetails=ManageOrder.objects.all()
     except Exception as e:
@@ -281,6 +285,7 @@ def view_all_order(request):
         'cats_menu':cats_menu
     }
     return render(request,'orders/view_all_orders.html',context)
+
 def user_view_all_order(request):
     cats_menu=Category.objects.all()
     user=request.user
@@ -292,3 +297,28 @@ def user_view_all_order(request):
         'cats_menu':cats_menu
     }
     return render(request,'orders/view_all_orders.html',context)
+
+
+def addToCart(request,pk):
+    print(pk)
+    try:
+        product=Product.objects.get(id=pk)
+    except Exception as e:
+        print(e)
+    user=request.user
+    cart=Cart(product,user)
+    cart.save()
+    messages.success(request,"Your Product Added to Cart")
+    return redirect('view_all_order')
+
+def viewCart(request):
+    all_products=Cart.objects.all()
+    cats_menu=Category.objects.all()
+    context={
+        'all_products':all_products,
+        'cats_menu':cats_menu
+    }
+    return render('view_cart.html',context)
+
+def removeFromCart(request):
+    pass

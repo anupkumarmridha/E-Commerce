@@ -26,6 +26,9 @@ urlpatterns = [
     # path('company_rating/<int:pk>', views.company_rating, name='company_rating'),
 
     # end point for orders
+    path('add_to_cart/<int:pk>', views.addToCart, name='add_to_cart'),
+    path('remove_from_cart', views.removeFromCart, name='remove_from_cart'),
+    path('view_cart', views.viewCart, name='view_cart'),
     path('place_order', views.place_order, name='place_order'),
     path('view_all_order', views.view_all_order, name='view_all_order'),
     path('user_view_all_order', views.user_view_all_order, name='user_view_all_order'),

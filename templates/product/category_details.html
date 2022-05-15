@@ -82,6 +82,7 @@
 
 
 
+ 
  <!-- -----------------------------------Order Modal end----------------------------------- -->
 
  <div class="modal fade" id="productbid_{{product.pk}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -96,9 +97,18 @@
         <div class="modal-body">  
            <input type="hidden" class="form-control" value="{{ product.pk }}" id="product_id" name="product_id" placeholder="{{ product.pk }}">
            <label>Total Items: </label>
-           <input type="number" onclick=total_price_cal() name="items" id="items" class="form-control" min='1', max={{product.total_stocks}} placeholder="Enter No of Items You Want to Buy">
+           <input type="number" onclick=total_price_cal({{product.id}},{{product.price}}) name="items" id="items{{product.id}}" class="form-control" min='1', max={{product.total_stocks}} placeholder="Enter No of Items You Want to Buy">
            <label>Total Price: </label>
-           <input type="number" class="form-control" id="total_price" name="total_price" value=""> 
+           <input type="number" class="form-control" id="total_price{{product.id}}" name="total_price" value=""> 
+           
+           <script>
+             function total_price_cal(id,price){  
+             let item=document.getElementById("items"+id).value;
+             console.log(item);
+             document.getElementById("total_price"+id).value = item *price;
+           }
+           </script>
+
            {% if user.user_type == '3' %}
              <label>Employee ID: </label>
              <input type="text" name="emp_id" id="emp_id" class="form-control" placeholder="Employee ID">
@@ -114,12 +124,7 @@
                </select>
            </div>
            {% endif %}
-           <script>
-             function total_price_cal(){
-             var item=document.getElementById('items').value;
-             document.getElementById("total_price").value=item*{{ product.price }};
-           }
-           </script>
+           
            
            <input type="text" name="delivery_address" placeholder="Enter Your delivery address" class="form-control" >         
         </div>
@@ -131,6 +136,7 @@
     </div>
   </div>
 </div>
+
 
 
 <!-- -----------------------------------Product requirement Modal start----------------------------------- -->
