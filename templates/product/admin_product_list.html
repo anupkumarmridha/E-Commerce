@@ -27,13 +27,13 @@
             {% for product in all_products %}
             <tr>
                 <th scope="row">{{ forloop.counter }}</th>
-                <td><a href="{% url 'product_details' product.pk %}">{{product.title}} </a></td>
+                <td><a href="{% url 'product_details' product.pk %}" style="color: black;">{{product.title}}</a></td>
                 <td>{{product.author}}</td>
                 <td>{{product.category}}</td>
                 <td>{{product.desc | slice:':120' | safe }}</td>
                 <td>
                     {% if product.product_image %}
-                    <img src=" {{ product.image_url|default_if_none:'#' }} " class="card-img-top p-2" alt="..." width="200" height="120">
+                    <img src=" {{ product.image_url|default_if_none:'#' }} " class="card-img-top p-2" alt="..." width="100px" height="100px">
                     {% else %}
                     <img src="{% static 'img/product.jpg' %}" alt="Avatar"  class="rounded-circle"  width=75 height=75>
                     {% endif %}

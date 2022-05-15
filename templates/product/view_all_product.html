@@ -105,6 +105,13 @@
             <input type="number" onclick=total_price_cal() name="items" id="items" class="form-control" min='1', max={{product.total_stocks}} placeholder="Enter No of Items You Want to Buy">
             <label>Total Price: </label>
             <input type="number" class="form-control" id="total_price" name="total_price" value=""> 
+            <script>
+              function total_price_cal(){
+              let item=document.getElementById('items').value;
+              console.log(item);
+              document.getElementById("total_price").value = item *{{ product.price }};
+            }
+            </script>
             {% if user.user_type == '3' %}
               <label>Employee ID: </label>
               <input type="text" name="emp_id" id="emp_id" class="form-control" placeholder="Employee ID">
@@ -120,12 +127,7 @@
                 </select>
             </div>
             {% endif %}
-            <script>
-              function total_price_cal(){
-              var item=document.getElementById('items').value;
-              document.getElementById("total_price").value=item*{{ product.price }};
-            }
-            </script>
+            
             
             <input type="text" name="delivery_address" placeholder="Enter Your delivery address" class="form-control" >         
          </div>

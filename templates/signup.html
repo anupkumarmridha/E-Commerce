@@ -1,12 +1,12 @@
 
 {% load static %}
 
-<div class="modal fade" id="singupModal" tabindex="-1" role="dialog" aria-labelledby="singupModal"
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModal"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="singupModalTitle">SingUp Here</h5>
+                <h5 class="modal-title" id="signupModalTitle">SignUp Here</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -16,14 +16,14 @@
                     <div class="form-group">
                         <select class="form-select" name="user_type" aria-label="Default select example">
                             <option selected>SignUp as a</option>
-                            <option value="2">Customer</option>
+                            <option value="2">Individual</option>
                             <option value="3">Company</option>
                           </select>
                       </div>
                       
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="choos a uniq username">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Choose a unique username">
                       </div>
                     <div class="form-group">
                         <label for="fname">First Name</label>
@@ -65,7 +65,7 @@
                             placeholder="Enter your password again" autocomplete="pass2" required>
                     </div>
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-primary">SingUp</button>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
                 </form>
             </div>
             <div class="modal-footer">

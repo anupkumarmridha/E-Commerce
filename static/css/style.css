@@ -1,18 +1,18 @@
 :root{
-    --cerulean: #4484ce;
-    --aluminium: #FFFFFA;
-    --light: #f9cf00;
-    --tangerine: #f19f4d;
+    --cerulean: #5AD7FF;
+    --aluminium: #fffffa;
+    --light: #91C83C;
+    --tangerine: #FAA019;
 }
 *{
     font-family: 'Montserrat', sans-serif;
 }
 body{
-    background-color: var(--aluminium);
+    background-color: #b2d9e6;
     height: 100vh;
 }
 .navbar{
-    background-color: var(--aluminium);
+    background-color: #003243;
 }
 .nav-item a{
     text-decoration: none;
@@ -23,9 +23,15 @@ body{
     
 }
 .nav-item a:hover{
-    color: white;
-    background-color: rgb(219, 121, 24);
-    text-shadow: 0.2rem 0.2rem 0.8rem rgb(219, 111, 3);
+    color: black;
+    background-color: #5AD7FF;
+    text-shadow: 0.2rem 0.2rem 0.8rem #5AD7FF;
+    /* text-shadow: 0.05rem 0.05rem 0.1rem var(--tangerine) ; */
+    /* padding: 5px; */
+}
+.container-fluid button:hover{
+    
+    box-shadow: 0.1rem 0.1rem 0.3rem #5AD7FF , -0.1rem -0.1rem 0.3rem #5AD7FF ;
     /* text-shadow: 0.05rem 0.05rem 0.1rem var(--tangerine) ; */
     /* padding: 5px; */
 }

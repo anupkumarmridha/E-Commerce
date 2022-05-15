@@ -2,9 +2,12 @@
 
 
     <!-- -----------------------------------Navbar start----------------------------------- -->
-    <nav class="navbar navbar-expand-lg mb-2">
+    <nav class="navbar navbar-expand-lg mb-2 navbar-dark">
       <div class="container-fluid">
-        <a class="navbar-brand text-dark" href="/"><strong>E-Electronics</strong></a>
+        <a class="navbar-brand text-light" href="/"><strong>
+          <img src="../static/fab/favicon-32x32.png" width="30" height="30" class="d-inline-block align-top" alt="">
+          E-Electronics
+        </strong></a>
         <button class="navbar-toggler border-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <i class="bi bi-list"></i>
         </button>
@@ -14,19 +17,6 @@
             {% comment %} <li class="nav-item mx-2">
               <a class="nav-link {% block productactive %}{% endblock productactive %}" href="/all-product-details">Listings</a>
             </li> {% endcomment %}
-            
-             <!-- <li class="nav-item mx-2">
-              <
-            
-            
-
-              {% comment %} <li class="nav-item mx-2">
-              <a class="nav-link " href="{% url 'add_customer' %}">add customer</a>
-             </li> 
-
-             <li class="nav-item mx-2">
-              <a class="nav-link" href="{% url 'add_company' %}">add company</a>
-             </li>  {% endcomment %} -->
             
             {% if user.is_authenticated %}
 
@@ -64,14 +54,6 @@
             </li>
            
           </ul>
-
-          
-          <!-- {% comment %} <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form> {% endcomment %} -->
-
-          {% comment %} login signup {% endcomment %}
           {% if user.is_authenticated %}
           <ul class="navbar-nav mr-2">
             <li class="nav-item dropdown">
@@ -96,14 +78,13 @@
 
         {% else %}
         <!-- Button to trigger login modal -->
-       <button type="button" class="btn btn-warning mr-2" data-toggle="modal" data-target="#loginModal">
+       <button type="button" class="btn mr-2 text-light" data-toggle="modal" data-target="#loginModal" style="background-color: #91C83C;">
             Login
         </button>
-        <!-- Button to trigger singup modal -->
-        <button type="button" class="btn btn-danger mr-2" data-toggle="modal" data-target="#singupModal">
-            Sing Up
-        </button>  
-        {% comment %} <a class="nav-link" type="button" class="btn btn-danger mr-2" href="{% url 'register' %}">Register</a> {% endcomment %}
+        <!-- Button to trigger signup modal -->
+        <button type="button" class="btn mr-2 text-light" data-toggle="modal" data-target="#signupModal" style="background-color: #FAA019;">
+            Sign Up
+        </button> 
         {% endif %}
         </div>
       </div>
