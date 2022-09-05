@@ -1,4 +1,5 @@
 
+# E-Commerce
 Problem Statement
 Hi, My name is Amit. I am the Owner of a product-based company
 where I sell Electronics Appliance. I want to shift my company to the
@@ -38,7 +39,3 @@ PCC he should be showed all the products bought via organization
 and which product is bought by which employee and for personal
 use or organizational use.
 
-# E-Commerce
-# sign-up sign-in, Product module work 
-# need to implement order module, admin, user module regarding product order
-# E-Commerce
